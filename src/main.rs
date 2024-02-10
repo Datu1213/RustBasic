@@ -48,12 +48,24 @@ fn main() {
     // Output: a = true, b = false
     b = true;
     
-    assert_eq!(a, b);
+    assert_eq!(a, b); // Check if they are equal.
 
     const PI: f64 = 3.1415926;
     // Reclaiming "const PI: f64 = 3.1415926;" will cause an error,
     // and it's the difference between "let" variable and "const" constant.
 
     let x = 0x2F as i32;
-    print!("{x}");
+    print!("{x}\n");
+
+    // "let guess = "42".parse::<i32>().expect("Not a number!");" Rust will confuse, it can't deduce what type this variable is.
+    // Make some indication manually.
+    let guess = "42".parse::<i32>().expect("Not a number!");
+    // Or "let guess: i32 = "42".parse().expect("Not a number!");"
+    print!("{guess}\n");
+
+    // Special type
+    let int_size: isize = 1; // Depends on the CPU
+    let uint_size: usize = 1; // Depends on the CPU
+    // My computer is 64bits == 8Byte, so both output should be 8
+    println!("isize: {}, usize: {}", std::mem::size_of_val(&int_size), std::mem::size_of_val(&uint_size));
 }
