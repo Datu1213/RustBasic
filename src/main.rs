@@ -26,13 +26,28 @@ fn main() {
     let d = 3_u32;     // With    type indication as a suffix of value, separated by "_".
     // "=" means "binding" but "assignment"
 
-    // "let" means a immutable variable, it can not change after assigned to a value.
+    // "let" means a immutable variable, it can be assigned again.
     // "d = 2;"  will cause an error: "cannot assign twice to immutable variable".
 
     // Use "mut" to make it mutable
     let mut e: u8 = 0;
     e = 1;
     
-
+    // Unused variables will cause warning, use prefix "_" to let Rust ignore this kind of warning.
+    let _f: u8 = 1; 
     
+
+    // Variable deconstruction.
+    let (a, mut b): (bool,bool) = (true, false); // Reclaim variables "a" and "b"
+    // a = true;    immutable 
+    // b = false;   mutable
+    println!("a = {:?}, b = {:?}", a, b);
+    // Output: a = true, b = false
+    b = true;
+    
+    assert_eq!(a, b);
+
+    const PI: f64 = 3.1415926;
+    // Reclaiming "const PI: f64 = 3.1415926;" will cause an error,
+    // and it's the difference between "let" variable and "const" constant.
 }
