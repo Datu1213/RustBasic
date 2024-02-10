@@ -38,8 +38,11 @@ fn main() {
     
 
     // Variable deconstruction.
-    let (a, mut b): (bool,bool) = (true, false); // Reclaim variables "a" and "b"
-    // a = true;    immutable 
+    // We use "Shadowing" here, reclaim and reassign variables "a" and "b".
+    // It will create new memory spaces, new variable with same names, and maybe new variable type, 
+    // and cover the previous one,
+    // which means more performance costs, while "mut" will not.
+    let (a, mut b): (bool,bool) = (true, false); 
     // b = false;   mutable
     println!("a = {:?}, b = {:?}", a, b);
     // Output: a = true, b = false
@@ -50,4 +53,7 @@ fn main() {
     const PI: f64 = 3.1415926;
     // Reclaiming "const PI: f64 = 3.1415926;" will cause an error,
     // and it's the difference between "let" variable and "const" constant.
+
+    let x = 0x2F as i32;
+    print!("{x}");
 }
