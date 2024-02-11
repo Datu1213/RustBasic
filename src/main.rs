@@ -76,7 +76,7 @@ fn float_trap() {
     let xyz: (f64, f64, f64) = (0.1, 0.2, 0.3);
 
     println!("abc (f32)");
-    println!("   0.1 + 0.2: {:x}", (abc.0 + abc.1).to_bits()); // Raw transmutation to u32, and print it as hexadecimal type.
+    println!("   0.1 + 0.2: {:x}", (abc.0 + abc.1).to_bits()); // Raw transmutation to u32 or u64, and print it as hexadecimal type.
     println!("         0.3: {:x}", (abc.2).to_bits());
     println!();
 
@@ -105,9 +105,20 @@ fn int_overflowing() {
 
 
 fn main() {
-    intrinsic_type();
+    // greet_world();
+    
+    // basic_type();
 
-    int_overflowing();
+    // intrinsic_type();
 
-    float_trap();
+    // int_overflowing();
+
+    // float_trap();
+
+    let a = 34 as u32;
+    println!("Decimal:     {:6 }", a);
+    println!("Hexadecimal: {:6x}", a);
+    println!("Octal:       {:6o}", a);
+    println!("Binary:      {:6b}", a);
+
 }
