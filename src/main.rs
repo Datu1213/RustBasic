@@ -1,37 +1,6 @@
-fn greet_world() {
-    let southern_germany: &str = "Grüß Gott!";
-    let chinese: &str = "世界，你好";
-    let english: &str = "World, hello";
-    let regions: [&str; 3] = [southern_germany, chinese, english];
-    for region in regions {
-        println!("{}", &region);
-    }
-    println!("{}", &chinese);
-}
-
-fn float_check() {
-    let abc: (f32, f32, f32) = (0.1, 0.2, 0.3);
-    let xyz: (f64, f64, f64) = (0.1, 0.2, 0.3);
-
-    println!("abc (f32)");
-    println!("   0.1 + 0.2: {:x}", (abc.0 + abc.1).to_bits());
-    println!("         0.3: {:x}", (abc.2).to_bits());
-    println!();
-
-    println!("xyz (f64)");
-    println!("   0.1 + 0.2: {:x}", (xyz.0 + xyz.1).to_bits());
-    println!("         0.3: {:x}", (xyz.2).to_bits());
-    println!();
-
-    assert!(abc.0 + abc.1 == abc.2);
-    assert!(xyz.0 + xyz.1 == xyz.2);
-}
-
-fn main() {
-    // println!("Hello, world!");
-
-    // greet_world();
-
+#![allow(unused)]
+fn basic_type() {
+    //////////////////////////////////////////////////////////////
     // Basic value and type
     //              f --> float
     //              i --> int
@@ -43,10 +12,10 @@ fn main() {
     let c = 3i32;      // With    type indication as a suffix of value.
     let d = 3_u32;     // With    type indication as a suffix of value, separated by "_".
     // "=" means "binding" but "assignment"
-
     // "let" means a immutable variable, it can be assigned again.
     // "d = 2;"  will cause an error: "cannot assign twice to immutable variable".
 
+    //////////////////////////////////////////////////////////////
     // Use "mut" to make it mutable
     let mut e: u8 = 0;
     e = 1;
@@ -54,7 +23,7 @@ fn main() {
     // Unused variables will cause warning, use prefix "_" to let Rust ignore this kind of warning.
     let _f: u8 = 1; 
     
-
+    //////////////////////////////////////////////////////////////
     // Variable deconstruction.
     // We use "Shadowing" here, reclaim and reassign variables "a" and "b".
     // It will create new memory spaces, new variable with same names, and maybe new variable type, 
@@ -72,6 +41,7 @@ fn main() {
     // Reclaiming "const PI: f64 = 3.1415926;" will cause an error,
     // and it's the difference between "let" variable and "const" constant.
 
+    // Use "as" to transmute variable's type
     let x = 0x2F as i32;
     print!("{x}\n");
 
@@ -80,21 +50,64 @@ fn main() {
     let guess = "42".parse::<i32>().expect("Not a number!");
     // Or "let guess: i32 = "42".parse().expect("Not a number!");"
     print!("{guess}\n");
+}
 
-    // Special type
+fn greet_world() {
+    let southern_germany: &str = "Grüß Gott!";
+    let chinese: &str = "世界，你好";
+    let english: &str = "World, hello";
+    let regions: [&str; 3] = [southern_germany, chinese, english];
+    for region in regions {
+        println!("{}", &region);
+    }
+    println!("{}", &chinese);
+}
+
+fn intrinsic_type() {
+    // Intrinsic type
     let int_size: isize = 1; // Depends on the CPU
     let uint_size: usize = 1; // Depends on the CPU
     // My computer is 64bits == 8Byte, so both output should be 8
     println!("isize: {}, usize: {}", std::mem::size_of_val(&int_size), std::mem::size_of_val(&uint_size));
+}
+
+fn float_trap() {
+    let abc: (f32, f32, f32) = (0.1, 0.2, 0.3);
+    let xyz: (f64, f64, f64) = (0.1, 0.2, 0.3);
+
+    println!("abc (f32)");
+    println!("   0.1 + 0.2: {:x}", (abc.0 + abc.1).to_bits()); // Raw transmutation to u32, and print it as hexadecimal type.
+    println!("         0.3: {:x}", (abc.2).to_bits());
+    println!();
+
+    println!("xyz (f64)");
+    println!("   0.1 + 0.2: {:x}", (xyz.0 + xyz.1).to_bits());
+    println!("         0.3: {:x}", (xyz.2).to_bits());
+    println!();
+
+    assert!(abc.0 + abc.1 == abc.2);
+    assert!(xyz.0 + xyz.1 == xyz.2);
+}
+
+fn int_overflowing() {
+    // assert!(0.1 + 0.2 == 0.3); // ERROR!
 
     assert_eq!(100u8.saturating_add(1), 101);
     assert_eq!(u8::MAX.saturating_add(127), u8::MAX);  
 
-    let a : u8 = 255;
+    let a: u8 = 255;
     let b = a.wrapping_add(20);
     println!("{}", b);  // 19
+    
+    let c = a.checked_add(20); 
+    println!("{:?}", c);
+}
 
-    assert!(0.1 + 0.2 == 0.3);// ERROR!
 
-    float_check();
+fn main() {
+    intrinsic_type();
+
+    int_overflowing();
+
+    float_trap();
 }
