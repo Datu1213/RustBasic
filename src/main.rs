@@ -68,4 +68,13 @@ fn main() {
     let uint_size: usize = 1; // Depends on the CPU
     // My computer is 64bits == 8Byte, so both output should be 8
     println!("isize: {}, usize: {}", std::mem::size_of_val(&int_size), std::mem::size_of_val(&uint_size));
+
+    assert_eq!(100u8.saturating_add(1), 101);
+    assert_eq!(u8::MAX.saturating_add(127), u8::MAX);  
+
+    let a : u8 = 255;
+    let b = a.wrapping_add(20);
+    println!("{}", b);  // 19
+
+    assert!(0.1 + 0.2 == 0.3);// ERROR!
 }
