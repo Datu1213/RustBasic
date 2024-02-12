@@ -177,10 +177,30 @@ fn move_deep_copy() {
 
 fn takes_ownership(_str: String) {
     // _str scope start.
-    print!("{_str}");
-    // _str scope end.
+    print!("{_str}\n");
+    // _str scope end, call `drop()`, release heap memory space.
 }
 
+fn just_copy(_num: i32) {
+    // _num scope start.
+    print!("{_num}\n");
+    // _num scope end.
+}
+
+fn var_scope() {
+    // str scope start.
+    let str = String::from("String");
+    // Ownership movement, str scpo
+    takes_ownership(str);
+    // str scope end.
+    
+    // print!("{str}"); Error.
+
+    let x: i32 = 1;
+    // Just simple copy.
+    just_copy(x);
+    print!("{x}\n"); // x Still availible.
+}
 fn main() {
     // greet_world();
     
@@ -210,7 +230,5 @@ fn main() {
 
     // move_deep_copy();
 
-    // str scope start.
-    let str = String::from("String");
-    takes_ownership(str);
+    var_scope();
 }
