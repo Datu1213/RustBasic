@@ -1,4 +1,5 @@
 #![allow(unused)]
+use num::complex::Complex;
 fn basic_type() {
     //////////////////////////////////////////////////////////////
     // Basic value and type
@@ -103,6 +104,21 @@ fn int_overflowing() {
     println!("{:?}", c);
 }
 
+fn not_a_number() {
+    let x = (-42.0_f32).sqrt();
+    if x.is_nan() {
+        println!("This is not a number!")
+    }
+}
+
+fn complex_number() {
+    let a = Complex{ re: 1, im: 1};
+    let b = Complex::new(2, 3);
+    let result_sum = a + b;
+    let result_mul = a * b;
+    println!("({:3}   + {:3}i)   + ({:3}   + {:3}i) = ({:3}   + {:3}i)", a.re, a.im, b.re, b.im, result_sum.re, result_sum.im);
+    println!("({:3}   + {:3}i)   * ({:3}   + {:3}i) = ({:3}   + {:3}i)", a.re, a.im, b.re, b.im, result_mul.re, result_mul.im);
+}
 
 fn main() {
     // greet_world();
@@ -115,10 +131,12 @@ fn main() {
 
     // float_trap();
 
+    // not_a_number();
     let a = 34 as u32;
     println!("Decimal:     {:6 }", a);
     println!("Hexadecimal: {:6x}", a);
     println!("Octal:       {:6o}", a);
     println!("Binary:      {:6b}", a);
 
+    complex_number();
 }
