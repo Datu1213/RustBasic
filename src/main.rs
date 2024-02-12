@@ -153,6 +153,34 @@ fn add_with_extra(x: i32, y: i32) -> i32 { // Every argument needs a type indica
     x + y               // Expression: Do something with    return value.
     // No semicolon.
 }
+
+fn move_deep_copy() {
+    let x = 3; // Basic type was stored in stack, auto copy happened here, no need for ownership movement.
+    let y = x; // In other words, those types known with their size will be stored in stack.
+
+    let str: String = String::from("String."); // String is not basic type, it was stored in heap.
+    let str2 = str; // Ownership movement occurs, "s1" will be discarded.
+    // "Move" looks like shallow copy.
+    // print!("{str}");  Error.
+    print!("{str2}\n");
+
+    // Clone(Deep copy)
+    let str3 = str2.clone();
+    print!("{str3}\n");
+
+    // Reference
+    let str4: &str = "StringRef";
+    let str5: &str = str4; // str4 and str 5 don't own "StringRef".
+    print!("{str4}\n"); // No error, no ownership movement.
+    print!("{str5}\n");
+}
+
+fn takes_ownership(_str: String) {
+    // _str scope start.
+    print!("{_str}");
+    // _str scope end.
+}
+
 fn main() {
     // greet_world();
     
@@ -179,4 +207,10 @@ fn main() {
     // println!("{}", adddd(1, 2));
 
     // println!("{:#?}", unit_type()); 
+
+    // move_deep_copy();
+
+    // str scope start.
+    let str = String::from("String");
+    takes_ownership(str);
 }
