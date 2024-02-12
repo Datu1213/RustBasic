@@ -51,12 +51,17 @@ fn basic_type() {
     let guess = "42".parse::<i32>().expect("Not a number!");
     // Or "let guess: i32 = "42".parse().expect("Not a number!");"
     print!("{guess}\n");
+
+    // Seperate a longer number with "_".
+    let one_million: i64 = 1_000_000;
+    // It's same to "let one_million: i64 = 1000000;".
+    println!("{}", one_million.pow(2));
 }
 
 fn greet_world() {
-    let southern_germany: &str = "Grüß Gott!";
-    let chinese: &str = "世界，你好";
-    let english: &str = "World, hello";
+    let southern_germany: &str  = "Grüß Gott!";
+    let chinese: &str           = "世界，你好";
+    let english: &str           = "World, hello";
     let regions: [&str; 3] = [southern_germany, chinese, english];
     for region in regions {
         println!("{}", &region);
@@ -120,6 +125,34 @@ fn complex_number() {
     println!("({:3}   + {:3}i)   * ({:3}   + {:3}i) = ({:3}   + {:3}i)", a.re, a.im, b.re, b.im, result_mul.re, result_mul.im);
 }
 
+fn character() {
+    // Rust use Unicode: 4Bytes, not traditional char: 1Byte.
+    let c = 'z';
+    let z = 'ℤ'; // Styled "Z".
+    let g = '国'; // Chinese character.
+    let heart_eyed_cat = '😻'; // Emoji character.
+    //////////////// Use `'`, not `"`.
+    println!("Size of characters: {}, {}, {}, {}", std::mem::size_of_val(&c), std::mem::size_of_val(&z), std::mem::size_of_val(&g), std::mem::size_of_val(&heart_eyed_cat));
+}
+
+fn adddd(x: i32, y: i32) -> i64 {
+    return x as i64 * y as i64;
+}
+
+fn unit_type() {
+    // Rust function always have a return type;
+    // It is not "void", it's unit type ----> "()". 
+
+    // Code "println!("{:#?}", unit_type());" to see what will be displayed.
+    return;
+}
+
+fn add_with_extra(x: i32, y: i32) -> i32 {
+    let x = x + 1; // Statement : Do something without return value.
+    let y = y + 5; // Statement : Do something without return value.
+    x + y               // Expression: Do something with    return value.
+    // No semicolon.
+}
 fn main() {
     // greet_world();
     
@@ -132,11 +165,18 @@ fn main() {
     // float_trap();
 
     // not_a_number();
-    let a = 34 as u32;
-    println!("Decimal:     {:6 }", a);
-    println!("Hexadecimal: {:6x}", a);
-    println!("Octal:       {:6o}", a);
-    println!("Binary:      {:6b}", a);
 
-    complex_number();
+    // let a = 34 as u32;
+    // println!("Decimal:     {:6 }", a);
+    // println!("Hexadecimal: {:6x}", a);
+    // println!("Octal:       {:6o}", a);
+    // println!("Binary:      {:6b}", a);
+
+    // complex_number();
+
+    // character();
+
+    // println!("{}", adddd(1, 2));
+
+    // println!("{:#?}", unit_type()); 
 }
