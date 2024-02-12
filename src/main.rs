@@ -147,7 +147,7 @@ fn unit_type() {
     return;
 }
 
-fn add_with_extra(x: i32, y: i32) -> i32 {
+fn add_with_extra(x: i32, y: i32) -> i32 { // Every argument needs a type indication!!!!!!!!!
     let x = x + 1; // Statement : Do something without return value.
     let y = y + 5; // Statement : Do something without return value.
     x + y               // Expression: Do something with    return value.
