@@ -1,4 +1,5 @@
 #![allow(unused)]
+
 use num::complex::Complex;
 fn basic_type() {
     //////////////////////////////////////////////////////////////
@@ -173,6 +174,7 @@ fn move_deep_copy() {
     let str5: &str = str4; // str4 and str 5 don't own "StringRef".
     print!("{str4}\n"); // No error, no ownership movement.
     print!("{str5}\n");
+
 }
 
 fn takes_ownership(_str: String) {
@@ -200,6 +202,38 @@ fn var_scope() {
     // Just simple copy.
     just_copy(x);
     print!("{x}\n"); // x Still availible.
+}
+
+fn borrow_ref_deref() {
+    let x: i32 = 1;
+    let y = &x;
+
+    assert_eq!(x, *y);
+}
+
+fn calc_string_length(str: &String) {
+    println!("String length in bytes: {}", str.len());
+}
+
+fn immutable_ref() {
+    let str: String = String::from("String");
+    calc_string_length(&str); // Just use it with reference, no ownership movement.
+    print!("{str}\n"); // No error.
+}
+
+fn mutable_ref() {
+    let mut str = String::from("String");
+    mutable_change_string(&mut str);
+    print!("{str}\n");
+
+    let mut_ref1: &mut String = &mut str;
+    let mut_ref2: &mut String = &mut str;
+    // println!("{}, {}", mut_ref1, mut_ref2); "cannot borrow `str` as mutable more than once at a time"
+    let imut_ref3 = &str;
+}
+
+fn mutable_change_string(str: &mut String) {
+    str.push_str("Pushed tail.");
 }
 fn main() {
     // greet_world();
@@ -230,5 +264,9 @@ fn main() {
 
     // move_deep_copy();
 
-    var_scope();
+    // var_scope();
+
+    // borrow_ref_deref();
+
+    immutable_ref();
 }
