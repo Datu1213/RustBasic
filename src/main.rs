@@ -229,8 +229,21 @@ fn mutable_ref() {
     let mut_ref1: &mut String = &mut str;
     let mut_ref2: &mut String = &mut str;
     // println!("{}, {}", mut_ref1, mut_ref2); "cannot borrow `str` as mutable more than once at a time"
-    let imut_ref3 = &str;
+    let immut_ref3 = &str;
+
+    let mut_ref4: &mut String = &mut str;
+    // println!("{}, {}", mut_ref2, immut_ref3); Dirty data warning!!!
 }
+
+// fn dangle_test() { // Dangle references.
+//     let reference_to_nothing = dangle();
+// }
+
+// fn dangle() -> &String {
+//     let s = String::from("hello");
+
+//     &s // Error!!! Return a dying var.
+// }
 
 fn mutable_change_string(str: &mut String) {
     str.push_str("Pushed tail.");
