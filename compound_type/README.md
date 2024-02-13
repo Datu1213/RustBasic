@@ -1,0 +1,2 @@
+# RustBasic
+String and slice.
