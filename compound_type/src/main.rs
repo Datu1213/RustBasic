@@ -34,8 +34,43 @@ fn chinese_clice() {
     // byte index 1 is not a char boundary; it is inside '中' (bytes 0..3) of `中国话`
 }
 
+fn push_string() {
+    let mut str = String::from("a");
+
+    // Push a fixed 4Bytes char.
+    str.push('\u{5426}'); // Unicode char.
+    // Char use `'` not `"`.
+
+    // Push a String.
+    str.push_str("bcd");
+
+    println!("{}", str); // a否bcd
+}
+
+fn insert_string() {
+    let mut s = String::from("Hello pineapple!");
+    s.insert(5, ',');
+    println!("insert() -> {}", s);
+    s.insert_str(6, " I like");
+    println!("insert_str() -> {}", s);
+}
+
+fn replace_string() {
+    let mut s = String::from("Hello pineapple!");
+    s.replace("pineapple", "apple");
+    s = s.replacen("p", "P", 3); // Not intrinsic, it has a return value.
+    s.replace_range(0..=4, "HELLO"); // No square backets "[]".
+
+    println!("{}", s); // HELLO PineaPPle!
+}
 fn main() {
     // int_slice();
 
     // chinese_clice();
+
+    // push_string();
+
+    insert_string();
+
+    replace_string();
 }
