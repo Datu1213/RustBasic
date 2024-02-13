@@ -57,11 +57,14 @@ fn insert_string() {
 
 fn replace_string() {
     let mut s = String::from("Hello pineapple!");
-    s.replace("pineapple", "apple");
+    s.replace("pineapple", "apple"); // Change itself, use "&mut self".
     s = s.replacen("p", "P", 3); // Not intrinsic, it has a return value.
-    s.replace_range(0..=4, "HELLO"); // No square backets "[]".
 
-    println!("{}", s); // HELLO PineaPPle!
+    s.replace_range(0..=4, "HELLO_suffix"); // They don't have to have a same length.
+    // Change itself, use "&mut self". 
+    // And no square backets "[]" for property "range".
+
+    println!("{}", s); // HELLO_suffix PineaPPle!
 }
 fn main() {
     // int_slice();
