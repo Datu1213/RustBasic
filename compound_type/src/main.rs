@@ -159,6 +159,68 @@ fn iterate_utf8_in_byte() {
     }
     println!();
 }
+
+fn tuple() -> (i32, i32) {
+    let a = (1, 2, '\u{1234}');
+    println!("{} {} {}", a.0, a.1, a.2); // Use members in tuple with `.` and index.
+    return (1, 1);
+}
+
+fn struct_test() {
+    struct TestStruct {
+        name: String,
+        age: u8,
+        height_and_weight: (u8, u8)
+    }
+    let me = TestStruct { // Init every one!!!!!
+        name: String::from("Datu"),
+        height_and_weight: (1, 2),
+        age: 2 // No need for consistence of sequence.
+    };
+
+    println!("{}", me.name);
+
+    fn build_user(name: String, age: u8, height: u8, weight: u8) -> TestStruct {
+        // return TestStruct {
+        //     name: name,
+        //     age: age,
+        //     height_and_weight: (height, weight)
+        // };
+
+        // Or if they has a same member name, just like Typescript.
+
+        return TestStruct {
+            name,
+            age,
+            height_and_weight: (height, weight)
+        };
+    }
+
+    fn struct_update() {
+        let old = TestStruct { 
+            name: String::from("Datu"),
+            height_and_weight: (1, 2),
+            age: 2 
+        };
+
+        // let new = TestStruct { 
+        //     name: old.name,
+        //     height_and_weight: old.height_and_weight, // Update from old.
+        //     age: 3 
+        // };
+
+        let new = TestStruct { // Aetter way.
+            age: 3, 
+            ..old // old.name moved here.
+        };
+
+        // println!("{}", old.name); Error, old.name has been moved.
+        // println!("{}", old);      Same error.
+    }
+}
+
+
+
 fn main() {
     // int_slice();
 
@@ -180,5 +242,7 @@ fn main() {
 
     // escape_character();
 
-    iterate_utf8();
+    iterate_utf8_in_char();
+
+    iterate_utf8_in_byte();
 }
