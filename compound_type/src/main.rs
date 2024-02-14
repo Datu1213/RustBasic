@@ -127,9 +127,37 @@ fn concatenate_string_with_add() {
 fn concatenate_string_with_format() {
     let hello = String::from("Hello");
     let world = "world!";
-    let new_str = format!("{}, {}", hello, world);
-
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    let new_str = format!("{}, {}", hello, world);    // No movement here!!!      /////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    println!("{}", hello); 
     println!("{}", new_str);
+}
+
+fn escape_character() {
+    println!("\u{1F600}"); // Unicode, a smile face emoji.
+
+    println!("\x34\x24\x52"); // Escape characters, use hexadecimal.
+    println!(r"\x34\x24\x52"); // Use prefix 'r', No escape characters, row string.
+    println!(r#""\x34\x24\x52""#); // Use double '#' to make `""` raw string.
+    println!("\"\\x34\\x24\\x52\""); // Or use escape characters as usual.
+    
+}
+
+fn iterate_utf8_in_char() {
+    let str = "大漠孤烟直"; 
+    for c in str.chars() { // A good way to iterate UTF-8 characters.
+        print!("{}", c);
+    }
+    println!();
+}
+
+fn iterate_utf8_in_byte() {
+    let str = "大漠孤烟直"; 
+    for c in str.as_bytes() { // A good way to iterate UTF-8 characters.
+        print!("{}", c);
+    }
+    println!();
 }
 fn main() {
     // int_slice();
@@ -148,5 +176,9 @@ fn main() {
 
     //concatenate_string_with_add();
 
-    concatenate_string_with_format();
+    // concatenate_string_with_format();
+
+    // escape_character();
+
+    iterate_utf8();
 }
