@@ -97,12 +97,12 @@ fn remove_string() {
     // Remove second chinese character.
     // string_remove.remove(3);
     
-    // dbg!(string_remove);
+    let mut str_remove = dbg!(string_remove); // dbg! will borrow the ownership and then return it!
 
     // let d = string_remove.remove(234); // No index check or "Option", it's unsafe, be careful.
 
-    // And clean string.
-    string_remove.clear();
+    // string_remove.clear(); // Value has moved, error.
+    str_remove.clear(); // Clear string.
 }
 
 fn concatenate_string_with_add() {
@@ -217,6 +217,15 @@ fn struct_test() {
         // println!("{}", old.name); Error, old.name has been moved.
         // println!("{}", old);      Same error.
     }
+
+    #[derive(Debug)] // If you want to print a struct without implement of Display, use "#[derive(Debug)]".
+    struct DebugStruct {
+        any: i32
+    }
+    let debug_struct = DebugStruct {any: 1};
+
+    println!("{:?}", debug_struct);
+
 }
 
 
