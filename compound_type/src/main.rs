@@ -228,6 +228,24 @@ fn struct_test() {
 
 }
 
+fn enum_test() {
+    enum Activity { // Enum members' type can be different.
+        PlayComputer(i32),
+        Swimming {x: i32, y: i32},
+        Hiking(i32, i32)
+    }
+
+    /////////////////////////////////////////////////////////////
+    // Option type //////////////////////////////////////////////
+    // enum Option<T> {
+    // Some(T),     Var may be none.
+    // None,        Var is none.
+    // }
+    /////////////////////////////////////////////////////////////
+    
+    
+}
+
 
 
 fn main() {
