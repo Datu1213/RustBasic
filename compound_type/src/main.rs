@@ -245,8 +245,41 @@ fn enum_test() {
     
     
 }
+fn array_basic() {
+    let one    = [1, 2, 3];
+    let two: [u8; 3]    = [1, 2, 3];
+    let blank1 = [0; 3];
+    let blank2: [u8; 3] = [0; 3];
+    
+    // arrays is 2D Array
+    let arrays: [[u8; 3]; 4]  = [one, two, blank1, blank2];
+    let c = 1;
+    let b = &c;
+    println!("{:?}: ", b);
+    // A 2D loop
+    for a in &arrays {
+        print!("{:?}: ", a);
+        // Make "a" an iterator
+        // Or just use "for n in a {}"
+        for n in a.iter() {
+            print!("\t{} + 10 = {}", n, n+10);
+        }
+    
+        let mut sum = 0;
+        // from 0 to (a.len -1)
+        for i in 0..a.len() {
+            sum += a[i];
+        }
+        println!("\t({:?} = {})", a, sum);
+    }
+      
+}
 
+fn array_fn() {
+    let array: [String; 8] = std::array::from_fn(|_i| format!("I'm {}", _i));
 
+    println!("{:#?}", array);
+}
 
 fn main() {
     // int_slice();
@@ -269,7 +302,11 @@ fn main() {
 
     // escape_character();
 
-    iterate_utf8_in_char();
+    // iterate_utf8_in_char();
 
-    iterate_utf8_in_byte();
+    // iterate_utf8_in_byte();
+
+    array_basic();
+
+    // array_fn();
 }
