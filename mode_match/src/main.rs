@@ -43,7 +43,7 @@ fn match_and_assign() {
 
 fn macros_matches() {
     let dir_array = [1, 2, 3];
-    let mut filted = dir_array.iter().filter(|x| (**x) > 1).;
+    let mut filted = dir_array.iter().filter(|x| (**x) > 1);
     println!("{}", filted.next().unwrap());
     println!("{}", filted.next().unwrap());
     // assert!(matches!([Direction::South], dir_array.iter().filter(|x| matches!(x, Direction::South))))
