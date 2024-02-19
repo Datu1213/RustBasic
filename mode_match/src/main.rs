@@ -1,4 +1,8 @@
 #![allow(unused)]
+
+use std::{array, path::Display};
+#[derive(Debug)]
+#[derive(PartialEq)]
 enum Direction {
     East,
     West,
@@ -34,9 +38,18 @@ fn match_and_assign() {
         _ => "::1",
     };
 
-    println!("{}", ip_str);
+    println!("{}", ip_str); // West
 }
+
+fn macros_matches() {
+    let dir_array = [1, 2, 3];
+    let mut filted = dir_array.iter().filter(|x| (**x) > 1).;
+    println!("{}", filted.next().unwrap());
+    println!("{}", filted.next().unwrap());
+    // assert!(matches!([Direction::South], dir_array.iter().filter(|x| matches!(x, Direction::South))))
+}
+
 fn main() {
-    println!("Hello, world!");
+    macros_matches();
 }
 
