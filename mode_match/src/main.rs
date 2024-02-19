@@ -51,7 +51,7 @@ fn macros_matches() {
 
 fn only_one_match() {
     let v = Some(3);
-    if let Some(3) = v {
+    if let Some(3) = v { // Use "if let `option` = `value`", if only one option/mode will be matched.
         println!("three");
     }
 }
