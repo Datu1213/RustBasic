@@ -49,7 +49,16 @@ fn macros_matches() {
     // assert!(matches!([Direction::South], dir_array.iter().filter(|x| matches!(x, Direction::South))))
 }
 
+fn only_one_match() {
+    let v = Some(3);
+    if let Some(3) = v {
+        println!("three");
+    }
+}
+
 fn main() {
-    macros_matches();
+    // macros_matches();
+
+    only_one_match();
 }
 
