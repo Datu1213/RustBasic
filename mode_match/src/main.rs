@@ -80,6 +80,62 @@ fn deconstruct_option() {
     let none = plus_one(None);
     println!("{:?} {:?}", six, none);
 }
+
+fn while_let_loop() {
+    // Mutable.
+    let mut stack = Vec::new();
+
+    
+    stack.push(1);
+    stack.push(2);
+    stack.push(3);
+    // Mutable iterator.
+    let mut iter_stack = stack.iter();
+    
+    while let Some(top) = iter_stack.next() {
+        println!("{}", top);
+    }
+}
+
+fn enumerate() {
+    let v = vec!['a', 'b', 'c'];
+
+    // Tuple(index, value).
+    for (index, value) in v.iter().enumerate() {
+        println!("{} is at index {}", value, index);
+}
+}
+
+fn pattern_match() {
+    // Every `=` is a `match`!!!!
+    //
+    // match VALUE {
+    //     PATTERN => EXPRESSION,
+    //     PATTERN => EXPRESSION,
+    //     PATTERN => EXPRESSION,
+    // }
+    //
+    // match VALUE {
+    //     PATTERN => EXPRESSION,
+    //     PATTERN => EXPRESSION,
+    //     _ => EXPRESSION,
+    // }
+    //
+    // Variable's name is also a pattern.
+    // let PATTERN = EXPRESSION;
+    //
+    // if let PATTERN = SOME_VALUE {
+    //
+    // }
+    //
+    // fn foo(x: i32) {
+    //     // Some code.
+    // }
+    // 
+    // let Some(x) = some_option_value; // Error.
+    // `let` can't cover all options.
+    // But `if let` can do it.
+}
 fn main() {
     // macros_matches();
 
@@ -87,6 +143,8 @@ fn main() {
 
     // shadowing_in_match();
 
-    deconstruct_option();
+    // deconstruct_option();
+
+    // while_let_loop();
 }
 
