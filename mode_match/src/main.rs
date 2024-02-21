@@ -136,6 +136,16 @@ fn pattern_match() {
     // `let` can't cover all options.
     // But `if let` can do it.
 }
+
+fn or_match() {
+    let x = 1;
+
+    match x {
+        1 | 2 => println!("one or two"),
+        3 => println!("three"),
+        _ => println!("anything"),
+    }
+}
 fn main() {
     // macros_matches();
 
