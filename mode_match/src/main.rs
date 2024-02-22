@@ -146,6 +146,53 @@ fn or_match() {
         _ => println!("anything"),
     }
 }
+
+fn range_match() {
+    let x = 1;
+
+    match x {
+        1..=5 => println!("One to five"),
+        _ => println!("anything"),
+    }
+
+    let x = 'c';
+
+    match x {
+        'a'..='j' => println!("early ASCII letter"),
+        'k'..='z' => println!("late ASCII letter"),
+        _ => println!("something else"),
+    }
+}
+
+fn deconstrucion_mach() {
+    fn deconstrcut_struct() {
+        struct Point {
+            x: i32,
+            y: i32,
+        }
+        
+        let p = Point { x: 0, y: 7 };
+    
+        let Point { x: a, y: b } = p; // a and b are newly generated variables.
+        assert_eq!(0, a);
+        assert_eq!(7, b);
+
+        // Or
+        let Point { x, y } = p; // Use same names of x and y.
+        assert_eq!(0, x);
+        assert_eq!(7, y);
+
+        // Match parts of the struct. 
+        let p = Point { x: 0, y: 7 };
+
+        match p {
+            Point { x, y: 0 } => println!("On the x axis at {}", x), // Match y = 0
+            Point { x: 0, y } => println!("On the y axis at {}", y), // Match x = 0
+            Point { x, y } => println!("On neither axis: ({}, {})", x, y), // Others.
+        }
+    }
+    deconstrcut_struct();
+}
 fn main() {
     // macros_matches();
 
@@ -156,5 +203,9 @@ fn main() {
     // deconstruct_option();
 
     // while_let_loop();
+
+    // range_match();
+    
+    deconstrucion_mach();
 }
 
