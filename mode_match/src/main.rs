@@ -225,7 +225,75 @@ fn deconstrucion_mach() {
             }
         
     }
+    fn deconstrcut_array() {
+        // Fixed length
+        let arr: [u16; 2] = [114, 514];
+        let [x, y] = arr;
+
+        assert_eq!(x, 114);
+        assert_eq!(y, 514);
+
+        // Unfixed length
+        let arr: &[u16] = &[114, 514];
+
+        if let [x, ..] = arr {
+            assert_eq!(x, &114);
+        }
+
+        if let &[.., y] = arr {
+            assert_eq!(y, 514);
+        }
+
+        let arr: &[u16] = &[];
+
+        assert!(matches!(arr, [..]));
+        assert!(!matches!(arr, [x, ..]));
+    }
     deconstrcut_struct();
+}
+
+fn ignore() {
+    // Use `_` to ignore value in patterns, arguments or arrays.
+    fn foo(_: i32, y: i32) {
+        println!("This code only uses the y parameter: {}", y);
+    }
+    
+
+
+    let mut setting_value = Some(5);
+    let new_setting_value = Some(10);
+
+    match (setting_value, new_setting_value) {
+        (Some(_), Some(_)) => {
+            println!("Can't overwrite an existing customized value");
+        }
+        _ => {
+            setting_value = new_setting_value;
+        }
+    }
+
+    println!("setting is {:?}", setting_value);
+
+
+
+    let numbers = (2, 4, 8, 16, 32);
+
+    match numbers {
+        (first, _, third, _, fifth) => {
+            println!("Some numbers: {}, {}, {}", first, third, fifth)
+        },
+    }
+
+
+
+    // `_` wil NOT bind any value.
+    let s = Some(String::from("Hello!"));
+
+    if let Some(_) = s {    // if let Some(_s) = s {  Value will borrow if you use `_s`.
+        println!("found a string");
+    }
+
+    println!("{:?}", s);
 }
 fn main() {
     // macros_matches();
