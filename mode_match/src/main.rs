@@ -1,8 +1,7 @@
 #![allow(unused)]
 
-use std::{array, path::Display};
+use std::array;
 #[derive(Debug)]
-#[derive(PartialEq)]
 enum Direction {
     East,
     West,
