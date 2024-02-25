@@ -1,5 +1,6 @@
 #![allow(unused)]
 
+
 #[derive(Debug)]
 pub struct Rectangle { // Struct
     width: u32, 
@@ -30,8 +31,38 @@ impl Rectangle { // Methods of Struct
 }
 
 
+// impl for enum 
+enum Message {
+    Quit(i32),
+    Move { x: i32, y: i32 },
+    Write(String),
+    ChangeColor(i32, i32, i32),
+}
+
+impl Message {
+    fn process(&self) {
+        match self {
+            Self::Quit(-1) => {
+                println!("Bye!!");
+            }
+            Self::ChangeColor(r, g, b) => {
+                println!("R: {}, G: {}, B: {}", r, g, b);
+            }
+            Self::Move { x, y } => {
+                println!("Move to:({}, {})", x, y);
+            }
+            Self::Write(str) => {
+                println!("{}", str);
+            }
+            _ => {}
+        }
+    }
+}
 fn main() {
     let rec = Rectangle::new(1, 2);
     
     println!("{:3}", rec.width);
+
+    let m = Message::Write(String::from("hello"));
+    m.process();
 }
