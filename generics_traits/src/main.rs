@@ -47,7 +47,12 @@ fn const_generic<T: std::fmt::Debug, const N: usize>(arr: [T; N]) {
 
 // Trait / Interface
 pub trait Speak {
-    fn speak(&self);
+    // No `{}`, use `;`.
+    // fn speak(&self); // Without default implement.
+
+    fn speak(&self) {
+        println!("AAAAAAAAAAAAAA");
+    } // No `;`, use `{}`.
 }
 
 pub struct Cat {
@@ -56,7 +61,7 @@ pub struct Cat {
 
 impl Speak for Cat {
     fn speak(&self) {
-        println!("Mew.")
+        println!("Mew.");
     }
 }
 
@@ -66,8 +71,15 @@ pub struct Dog {
 
 impl Speak for Dog {
     fn speak(&self) {
-        println!("Wolf.")
+        println!("Wolf.");
     }
+}
+
+pub struct Homo {
+    
+}
+
+impl Speak for Homo {
 }
 
 // Orphan rule.
@@ -83,6 +95,8 @@ fn main() {
 
     let cat = Cat{};
     let dog = Dog{};
+    let homo = Homo{};
     cat.speak();
     dog.speak();
+    homo.speak();
 }
