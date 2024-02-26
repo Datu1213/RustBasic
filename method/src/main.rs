@@ -40,7 +40,7 @@ enum Message {
 }
 
 impl Message {
-    fn process(&self) {
+    pub fn process(&self) {
         match self {
             Self::Quit(-1) => {
                 println!("Bye!!");
