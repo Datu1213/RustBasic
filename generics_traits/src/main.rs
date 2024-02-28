@@ -108,6 +108,27 @@ impl<T: Speak> Crying for T {
 // If you want to make a implement of a trait for a strcut,
 // at least one of them----the "Strcut" or the "Trait" is claimed in current scope.
 
+// Use trait in function arguments.
+// Term candy:
+fn foo(i: &impl Speak, j: &impl Speak) {
+    
+}
+
+// Normal way.
+fn bar<T: Speak, U: Speak>(i: &T, j: &U) {
+    
+}
+
+// If "i" is as same as "j", use normal way
+fn baz<T: Speak>(i: &T, j: &T) {
+    
+}
+
+// Multipul trait bounds.
+fn foo_mtb(i: &(impl Speak + Crying)) {
+
+}
+
 fn main() {
     // println!("Hello, world!");
     // let arr = [1, 2, 3];
