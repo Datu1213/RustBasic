@@ -52,7 +52,7 @@ pub trait Speak {
     // fn speak(&self); // Without default implement.
 
     fn speak(&self) {
-        println!("AAAAAAAAAAAAAA");
+        println!("Heng, heng, AAAAAAAAAAAAAA");
     } // No `;`, use `{}`.
 }
 
@@ -81,17 +81,17 @@ pub struct Homo {
 }
 
 impl Speak for Homo {
-
+// Use default implement.
 }
 
 pub trait Crying {
-    fn cry();
+    fn cry(&self);
 }
 
 // Make implement of Crying for every type who has made implement of Speak.
 // If you can speak, you can cry.
 impl<T: Speak> Crying for T {
-    fn cry() {
+    fn cry(&self) {
         println!("WAAAAAAAAAAAAAAAA!!!!!");
     }
 }
@@ -121,4 +121,7 @@ fn main() {
     cat.speak();
     dog.speak();
     homo.speak();
+    cat.cry();
+    dog.cry();
+    homo.cry();
 }
