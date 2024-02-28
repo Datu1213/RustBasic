@@ -111,8 +111,12 @@ impl<T: Speak> Crying for T {
 // Use trait in function arguments.
 // Term candy:
 fn foo(i: &impl Speak, j: &impl Speak) {
-    
+    ///////////////////////////////////////////////
+    // Motify that term `&` ignore a backet `()` //
+    // Integral statement: &(impl Speak)         //
+    ///////////////////////////////////////////////
 }
+//////////////////////////
 
 // Normal way.
 fn bar<T: Speak, U: Speak>(i: &T, j: &U) {
@@ -127,6 +131,18 @@ fn baz<T: Speak>(i: &T, j: &T) {
 // Multipul trait bounds.
 fn foo_mtb(i: &(impl Speak + Crying)) {
 
+}
+
+fn trait_bound_where<T, U>(i: &T, j: &U) 
+    where T: Speak,
+          U: Crying
+{
+    // Snip.
+}
+
+// Trait in return value.
+fn returns_something_can_speak() -> impl Speak {
+    return Cat {};
 }
 
 fn main() {
