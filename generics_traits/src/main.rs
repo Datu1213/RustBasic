@@ -145,6 +145,13 @@ fn returns_something_can_speak() -> impl Speak {
     return Cat {};
 }
 
+// Use `#[derive(Trait)]` to make a default implement.
+// Only availible for those trait which is intrincic in Rust standard.
+
+
+////////////////////////////////////
+// If you want to use a method of a trait, you shoud introduce this trait.
+///////////////////////////////////
 fn main() {
     // println!("Hello, world!");
     // let arr = [1, 2, 3];
