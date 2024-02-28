@@ -21,6 +21,7 @@ pub struct Rectangle<T> { // Struct
     height: T,
 }
 
+//////////////// Use Generic in methods.
 // Use `impl<T>`.
 impl<T> Rectangle<T>{
     fn width(&self) -> &T {
@@ -80,9 +81,30 @@ pub struct Homo {
 }
 
 impl Speak for Homo {
+
 }
 
-// Orphan rule.
+pub trait Crying {
+    fn cry();
+}
+
+// Make implement of Crying for every type who has made implement of Speak.
+// If you can speak, you can cry.
+impl<T: Speak> Crying for T {
+    fn cry() {
+        println!("WAAAAAAAAAAAAAAAA!!!!!");
+    }
+}
+// Or
+// impl<T> Crying for T 
+// where T: Speak
+// {
+//     fn cry() {
+//         println!("WAAAAAAAAAAAAAAAA!!!!!");
+//     }
+// }
+
+// Orphan rule. //
 // If you want to make a implement of a trait for a strcut,
 // at least one of them----the "Strcut" or the "Trait" is claimed in current scope.
 
