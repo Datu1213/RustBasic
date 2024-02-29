@@ -193,6 +193,7 @@ impl Display for FileState {
         }
     }
 }
+
 // Dynamic Traits
 trait Draw {
     fn draw(&self) -> String;
@@ -209,6 +210,36 @@ impl Draw for f64 {
         format!("f64: {}", *self)
     }
 }
+
+pub struct Button {
+    pub width: u32,
+    pub height: u32,
+    pub label: String,
+}
+
+impl Draw for Button {
+    fn draw(&self) -> String{
+        format!("Size: {} X {}, Label: {}", self.width, self.height, self.label)
+    }
+}
+
+struct SelectBox {
+    width: u32,
+    height: u32,
+    options: Vec<String>,
+    value: String
+}
+
+impl Draw for SelectBox {
+    fn draw(&self) -> String {
+        format!("Size: {} X {}, Label: {}", self.width, self.height, self.value)
+    }
+}
+pub struct Screen {
+    pub components: Vec<Box<dyn Draw>>,
+}
+
+
 
 fn main() {
     // println!("Hello, world!");
@@ -230,4 +261,24 @@ fn main() {
     let open = FileState::Open;
     println!("{}", open);
     println!("{:?}", open);
+
+    let screen = Screen {
+        components: vec![
+            Box::new(SelectBox {
+                width: 75,
+                height: 10,
+                options: vec![
+                    String::from("Yes"),
+                    String::from("Maybe"),
+                    String::from("No")
+                ],
+                value: String::from("Yes")
+            }),
+            Box::new(Button {
+                width: 50,
+                height: 10,
+                label: String::from("OK"),
+            }),
+        ],
+    };
 }
