@@ -1,5 +1,8 @@
 #![allow(unused)]
 
+use std::fs::File;
+use std::{fmt::Debug, ops::Add};
+
 fn add<T: std::ops::Add<Output = T>>(a:T, b:T) -> T {
    return a + b
 }
@@ -152,6 +155,61 @@ fn returns_something_can_speak() -> impl Speak {
 ////////////////////////////////////
 // If you want to use a method of a trait, you shoud introduce this trait.
 ///////////////////////////////////
+
+// Example: Add
+// use std::ops::Add
+#[derive(Debug)]
+struct Point<T: Add<T, Output = T>> {
+    x: T,
+    y: T
+}
+impl<T: Add<T, Output = T>> Add for Point<T> {
+    type Output = Point<T>;
+     fn add(self, rhs: Self) -> Self::Output {
+         return Point {
+            x: self.x + rhs.x,
+            y: self.y + rhs.y
+         }
+     }
+}
+
+//Error now.
+// fn add<T: Add<T, Output = T>>(a: T, b: T) -> T {
+//     a + b
+// }
+use std::fmt::{write, Display, Formatter, Result};
+
+#[derive(Debug)]
+enum FileState {
+    Open,
+    Closed
+}
+
+impl Display for FileState {
+    fn fmt(&self, f: &mut Formatter<'_>) -> Result {
+        match *self {
+            Self::Open => write!(f, "Open"),
+            Self::Closed => write!(f, "Cloesd")
+        }
+    }
+}
+// Dynamic Traits
+trait Draw {
+    fn draw(&self) -> String;
+}
+
+impl Draw for u8 {
+    fn draw(&self) -> String {
+        format!("u8: {}", *self)
+    }
+}
+
+impl Draw for f64 {
+    fn draw(&self) -> String {
+        format!("f64: {}", *self)
+    }
+}
+
 fn main() {
     // println!("Hello, world!");
     // let arr = [1, 2, 3];
@@ -168,4 +226,8 @@ fn main() {
     cat.cry();
     dog.cry();
     homo.cry();
+
+    let open = FileState::Open;
+    println!("{}", open);
+    println!("{:?}", open);
 }
