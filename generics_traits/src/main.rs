@@ -159,11 +159,11 @@ fn returns_something_can_speak() -> impl Speak {
 // Example: Add
 // use std::ops::Add
 #[derive(Debug)]
-struct Point<T: Add<T, Output = T>> {
+struct Point<T: Add<Output = T>> {
     x: T,
     y: T
 }
-impl<T: Add<T, Output = T>> Add for Point<T> {
+impl<T: Add<Output = T>> Add for Point<T> {
     type Output = Point<T>;
      fn add(self, rhs: Self) -> Self::Output {
          return Point {
@@ -236,7 +236,7 @@ impl Draw for SelectBox {
     }
 }
 pub struct Screen {
-    pub components: Vec<Box<dyn Draw>>,
+    components: Vec<Box<dyn Draw>>,
 }
 
 
@@ -281,4 +281,14 @@ fn main() {
             }),
         ],
     };
+
+    let p_1 = Point {
+        x: 0.1,
+        y: 0.2
+    };
+    let p_2 = Point {
+        x: 0.3,
+        y: 0.2
+    };
+    println!("{:?}", p_1 + p_2);
 }
