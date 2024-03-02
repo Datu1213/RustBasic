@@ -1,6 +1,7 @@
 #![allow(unused)]
 
 use std::fs::File;
+use std::ops::Deref;
 use std::process::Output;
 use std::{fmt::Debug, ops::Add};
 
@@ -331,6 +332,22 @@ fn same_name_associated_functions() {
     println!("{}", Dog::baby_name()); // Spot
     // Complet constrain statement.
     println!("{}", <Dog as Animal>::baby_name()); // puppy
+}
+
+// Avoid Orphan rule with new type
+fn anti_orphan() {
+    struct Wrapper(Vec<String>);
+    impl Deref for Wrapper {
+        type Target = Vec<String>;
+        fn deref(&self) -> &Self::Target {
+            &self.0
+        }
+    }
+    impl Display for Wrapper {
+        fn fmt(&self, f: &mut Formatter) -> Result {
+            write!(f, "[{}]", self.join(", "))
+        }
+    }
 }
 
 fn main() {
