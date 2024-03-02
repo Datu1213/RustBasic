@@ -1,9 +1,10 @@
 #![allow(unused)]
 
 use std::fs::File;
+use std::process::Output;
 use std::{fmt::Debug, ops::Add};
 
-fn add<T: std::ops::Add<Output = T>>(a:T, b:T) -> T {
+fn add<T: Add<Output = T>>(a:T, b:T) -> T {
    return a + b
 }
 
@@ -177,7 +178,7 @@ impl<T: Add<Output = T>> Add for Point<T> {
 // fn add<T: Add<T, Output = T>>(a: T, b: T) -> T {
 //     a + b
 // }
-use std::fmt::{write, Display, Formatter, Result};
+use std::fmt::{Display, Formatter, Result};
 
 #[derive(Debug)]
 enum FileState {
@@ -240,6 +241,97 @@ pub struct Screen {
 }
 
 
+// Associated type 
+trait AS {
+    type ASType;
+    type ASType2: Clone + Display + Debug;
+    // Associated type make it more clear to when you make an implement of trait.
+    // You don't have to rewrite `impl<Type_1, Type_2...>`.
+    // But Associated types don't have defualt names.
+}
+
+///////////////////////////////////////////
+// Defualt Generics type.                //
+// See the example of traitstd::op::Add. //
+///////////////////////////////////////////
+
+
+// impl Add with different member being added.
+struct Millimeters(u32);
+struct Meters(u32);
+struct Centimeters(u32);
+
+impl Add<Millimeters> for Meters{
+    type Output = Centimeters;
+    fn add(self, rhs: Millimeters) -> Self::Output {
+        Centimeters(self.0 + rhs.0 * 1000)
+    }
+}
+// Meters + Millimeters => Centimeters
+// That's why `Add<Millimeters, Output = Centimeters>` is so beautiful.
+
+
+
+// Methods with a same name.
+trait Pilot {
+    fn fly(&self);
+}
+
+trait Wizard {
+    fn fly(&self);
+}
+
+struct Human;
+
+impl Pilot for Human {
+    fn fly(&self) {
+        println!("This is your captain speaking.");
+    }
+}
+
+impl Wizard for Human {
+    fn fly(&self) {
+        println!("Up!");
+    }
+}
+
+impl Human {
+    fn fly(&self) {
+        println!("Suiiiiiiiiiiiiiiiiiiiiii.");
+    }
+}
+// Now Human has three fly(&self)
+fn sanme_name_methods() {
+    let humen = Human{};
+    humen.fly(); // Defualt method.  "Suiiiiiiiiiiiiiiiiiiiiii"
+    Pilot::fly(&humen); // "Up!"
+    Wizard::fly(&humen); // "This is your captain speaking."
+}
+
+fn same_name_associated_functions() {
+    trait Animal {
+        fn baby_name() -> String;
+    }
+    
+    struct Dog;
+    
+    impl Dog {
+        fn baby_name() -> String {
+            String::from("Spot")
+        }
+    }
+    
+    impl Animal for Dog {
+        fn baby_name() -> String {
+            String::from("puppy")
+        }
+    }
+
+    // Use baby_name() implated in Animal.
+    println!("{}", Dog::baby_name()); // Spot
+    // Complet constrain statement.
+    println!("{}", <Dog as Animal>::baby_name()); // puppy
+}
 
 fn main() {
     // println!("Hello, world!");
@@ -291,5 +383,8 @@ fn main() {
         x: 0.3,
         y: 0.2
     };
+
     println!("{:?}", p_1 + p_2);
+
+    same_name_associated_functions();
 }
