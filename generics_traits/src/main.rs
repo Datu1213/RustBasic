@@ -150,6 +150,22 @@ fn returns_something_can_speak() -> impl Speak {
     return Cat {};
 }
 
+trait ReturnImpl {
+    fn rt(&self) -> Box<dyn Speak>;
+}
+
+struct Foo {}
+
+impl ReturnImpl for Foo {
+    fn rt(&self) -> Box<dyn Speak> {
+        if true {
+            Box::new(Cat{})
+        } else {
+            Box::new(Dog{})
+        }
+    }
+}
+
 // Use `#[derive(Trait)]` to make a default implement.
 // Only availible for those trait which is intrincic in Rust standard.
 
@@ -350,6 +366,8 @@ fn anti_orphan() {
     }
 }
 /////////////
+
+
 fn main() {
     // println!("Hello, world!");
     // let arr = [1, 2, 3];

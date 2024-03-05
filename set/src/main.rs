@@ -1,6 +1,6 @@
 #![allow(unused)]
 
 fn main() {
-    let vec<i32> = Vec::new();
+    let a: Vec<i32>  = Vec::new();
     println!("Hello, world!");
 }
