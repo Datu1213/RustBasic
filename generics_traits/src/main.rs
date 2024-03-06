@@ -170,7 +170,7 @@ impl ReturnImpl for Foo {
 // Only availible for those trait which is intrincic in Rust standard.
 
 
-////////////////////////////////////
+//////////////////////////////////////////
 // If you want to use a method of a trait, you shoud introduce this trait.
 ///////////////////////////////////
 
